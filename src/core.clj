@@ -1,13 +1,35 @@
-(ns core)
+(ns core
+  (:require [raylib.window :as rcw]
+            [raylib.draw :as rcd]
+            [raylib.nrepl :as nrepl]
+            [raylib.colors :as rcc]))
 
-(require '[coffi.mem :as mem])
-(require '[coffi.ffi :as ffi :refer [defcfn]])
+;; Trying to follow steps from
+;; An Introduction to Raylib by Coding with Sphere
+;; https://www.youtube.com/watch?v=AniAoJC6QAc
 
-(defcfn strlen
-  "Given a string, measures its length in bytes."
-  strlen [::mem/c-string] ::mem/long)
+(defn init []
+  (rcw/init-window 600 400 "awesome window"))
 
-(strlen "hello")
-;; => 5
+(defn draw []
+  (rcd/begin-drawing)
+  (rcd/clear-background rcc/skyblue)
+  (rcd/end-drawing))
 
-(ffi/load-library "")
+(defn start []
+  (nrepl/start {:port 7888})
+  (init)
+  (loop []
+    (when-not (rcw/window-should-close?)
+      (draw)
+      (recur)))
+  (rcw/close-window))
+
+(defn -main [& args]
+  (start))
+
+(comment
+
+  (start)
+
+  ())

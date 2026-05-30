@@ -1,4 +1,4 @@
-(ns raylib
+(ns raylib.core
   (:require [coffi.ffi :as ffi]
             [clojure.string :as str])
   (:import [java.io File]))

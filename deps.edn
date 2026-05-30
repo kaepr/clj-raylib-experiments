@@ -2,18 +2,12 @@
  :deps {org.clojure/clojure {:mvn/version "1.12.4"}
         org.suskalo/coffi {:mvn/version "1.0.615"}}
  :aliases
- {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}
-                       cider/cider-nrepl {:mvn/version "0.58.0"}
-                       refactor-nrepl/refactor-nrepl {:mvn/version "3.11.0"}
-                       com.bhauman/rebel-readline {:mvn/version "0.1.5"}}
-          :jvm-opts ["--enable-native-access=ALL-UNNAMED"
-                     ; copied from https://github.com/ertugrulcetin/raylib-clojure-playground/blob/master/project.clj
-                     "-XstartOnFirstThread"
-                     "-Djava.library.path=libs:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
-          :main-opts ["--eval" "(apply require clojure.main/repl-requires)"
-                      "--main" "nrepl.cmdline"
-                      "--interactive"
-                      "--middleware" "[cider.nrepl/cider-middleware,refactor-nrepl.middleware/wrap-refactor]"
-                      "-f" "rebel-readline.main/-main"]}
-  :test {:extra-deps {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
-         :main-opts ["-m" "cognitect.test-runner" "-d" "test"]}}}
+ {:dev {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}
+                     cider/cider-nrepl {:mvn/version "0.58.0"}
+                     org.clojure/tools.logging {:mvn/version "1.3.1"}
+                     refactor-nrepl/refactor-nrepl {:mvn/version "3.11.0"}}
+        :jvm-opts ["--enable-native-access=ALL-UNNAMED"
+                                        ; copied from https://github.com/ertugrulcetin/raylib-clojure-playground/blob/master/project.clj
+                   "-XstartOnFirstThread"
+                   "-Djava.library.path=libs:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
+        :main-opts ["-m" "core"]}}}
