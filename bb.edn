@@ -1,3 +1,7 @@
 {:tasks
- {dev {:doc "Starts a development session."
-       :task (shell "clojure" "-M:dev" *command-line-args*)}}}
+ {dev
+  {:doc "Starts a development session."
+   :task (apply shell "clojure" "-M:dev" *command-line-args*)}
+  clear-code-dev
+  {:doc "Starts a development session for Clear Code tutorials"
+   :task (apply shell "clojure" "-M:clear-code-dev" *command-line-args*)}}}
