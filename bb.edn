@@ -1,0 +1,3 @@
+{:tasks
+ {nrepl {:doc "Starts a nrepl session."
+         :task (shell "clojure" "-M:nrepl" *command-line-args*)}}}
