@@ -33,3 +33,22 @@
 (defcfn end-drawing
   "EndDrawing"
   [] ::mem/void)
+(defcfn set-target-fps
+  {:arglists '([fps])}
+  "SetTargetFPS"
+  [::mem/int] ::mem/void)
+
+(defcfn get-frame-time
+  {:arglists '([])}
+  "GetFrameTime"
+  [] ::mem/float)
+
+(defcfn get-time
+  {:arglists '([])}
+  "GetTime"
+  [] ::mem/double)
+
+(defcfn get-fps
+  {:arglists '([])}
+  "GetFPS"
+  [] ::mem/int)
