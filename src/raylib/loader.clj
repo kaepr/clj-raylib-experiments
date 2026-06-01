@@ -70,13 +70,13 @@
   ;; Load raylib - prefer bundled, fallback to system
   (delay
     (if-let [bundled-path (find-bundled-lib)]
-      (if bundled-path
-        (do
-          (println "[raylib] Loading bundled library:" bundled-path)
-          (ffi/load-library bundled-path))
-        (do
-          (println "[raylib] Loading system library")
-          (ffi/load-system-library "raylib"))))))
+      (do
+        (println "[raylib] Loading bundled library:" bundled-path)
+        (ffi/load-library bundled-path))
+      (do
+        (println "[raylib] Loading system library")
+        (ffi/load-system-library "raylib")))
+    true))
 
 (defn ensure-loaded! []
   @loaded?)

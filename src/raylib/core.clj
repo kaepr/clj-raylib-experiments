@@ -1,6 +1,5 @@
 (ns raylib.core
   (:require [coffi.mem :as mem]
-            [raylib.core]
             [raylib.loader :as loader]
             [raylib.structs :as structs]
             [raylib.internals :as internals]
