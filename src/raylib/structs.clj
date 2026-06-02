@@ -49,3 +49,10 @@
     [:height ::mem/int]
     [:mipmaps ::mem/int]
     [:format ::mem/int]]])
+
+(defalias ::rectangle
+  [::mem/struct
+   [[:x ::mem/float]
+    [:y ::mem/float]
+    [:width ::mem/float]
+    [:height ::mem/float]]])
