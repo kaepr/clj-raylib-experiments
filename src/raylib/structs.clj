@@ -56,3 +56,10 @@
     [:y ::mem/float]
     [:width ::mem/float]
     [:height ::mem/float]]])
+
+(defalias ::camera-2d
+  [::mem/struct
+   [[:offset ::vector-2]
+    [:target ::vector-2]
+    [:rotation ::mem/float]
+    [:zoom ::mem/float]]])

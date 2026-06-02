@@ -51,3 +51,13 @@
   {:arglists '([])}
   "GetFPS"
   [] ::mem/int)
+
+(defcfn begin-mode-2d
+  {:arglists '([camera])}
+  "BeginMode2D"
+  [::structs/camera-2d] ::mem/void)
+
+(defcfn end-mode-2d
+  {:arglists '([])}
+  "EndMode2D"
+  [] ::mem/void)
