@@ -26,3 +26,16 @@
 (defmethod mem/deserialize* ::bool
   [obj _type]
   (not (zero? obj)))
+
+;; uint
+(defmethod mem/primitive-type ::uint
+  [_type]
+  ::mem/int)
+
+(defmethod mem/serialize* ::uint
+  [obj _type _scope]
+  (unchecked-int obj))
+
+(defmethod mem/deserialize* ::uint
+  [obj _type]
+  (Integer/toUnsignedLong obj))

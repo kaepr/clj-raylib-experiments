@@ -63,3 +63,37 @@
     [:target ::vector-2]
     [:rotation ::mem/float]
     [:zoom ::mem/float]]])
+
+
+(defalias ::wave
+  [::mem/struct
+   [[:frame-count ::ri/uint]
+    [:sample-rate ::ri/uint]
+    [:sample-size ::ri/uint]
+    [:channels ::ri/uint]
+    [:data ::mem/pointer]]])
+
+(defalias ::audio-stream
+  [::mem/struct
+   [[:buffer ::mem/pointer]
+    [:processor ::mem/pointer]
+    [:sample-rate ::ri/uint]
+    [:sample-size ::ri/uint]
+    [:channels ::ri/uint]
+    [:__padding [::mem/padding 4]]]])
+
+(defalias ::sound
+  [::mem/struct
+   [[:stream ::audio-stream]
+    [:frame-count ::ri/uint]
+    [:__padding [::mem/padding 4]]]])
+
+(defalias ::music
+  [::mem/struct
+   [[:stream ::audio-stream]
+    [:frame-count ::ri/uint]
+    [:looping ::ri/bool]
+    [:__padding-1 [::mem/padding 3]]
+    [:ctx-type ::mem/int]
+    [:__padding-2 [::mem/padding 4]]
+    [:ctx-data ::mem/pointer]]])
