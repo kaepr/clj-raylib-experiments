@@ -26,6 +26,10 @@ bb dev # or clj -M:dev
 
 This will launch a game window defined in `src/core.clj` and start's an nrepl server at port `7888`.
 
+## Pakman
+
+
+
 ## Clear Code Tutorial
 
 I am using this repository to follow [The ultimate introduction to Raylib by Clear Code](https://www.youtube.com/watch?v=UoAsDlUwjy0)
