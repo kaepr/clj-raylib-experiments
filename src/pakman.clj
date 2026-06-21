@@ -34,6 +34,27 @@
 (def board-x 260)
 (def board-y 36)
 (def tile-size 24)
+(def rewind-seconds 8)
+(def max-history-frames (* 60 rewind-seconds))
+
+(defn snapshot [state]
+  {:frame (:frame state)
+   :session (:session state)})
+
+(defn push-history [state]
+  (let [history (conj (:history state) (snapshot state))
+        history (if (> (count history) max-history-frames)
+                  (subvec history 1)
+                  history)]
+    (assoc state :history history)))
+
+(defn rewind-state [state]
+  (if-let [previous (peek (:history state))]
+    (-> state
+        (assoc :frame (:frame previous))
+        (assoc :session (:session previous))
+        (update :history pop))
+    state))
 
 (def player-speed 125.0)
 (def enemy-speed 96.0)
@@ -415,7 +436,8 @@
 (defn initial-state []
   {:assets (load-assets)
    :frame 0
-   :session (initial-session)})
+   :session (initial-session)
+   :history []})
 
 (defn reset-game! []
   (reset! state (initial-state)))
@@ -445,7 +467,8 @@
                 (input/key-down? keys/up) :up
                 (input/key-down? keys/down) :down
                 :else nil)
-   :restart? (input/key-pressed? keys/r)})
+   :restart? (input/key-pressed? keys/r)
+   :rewind? (input/key-down? keys/z)})
 
 (defn centered-on-tile? [mover]
   (= (:position mover)
@@ -501,9 +524,16 @@
       session)))
 
 (defn update-state [state input]
-  (if (:restart? input)
+  (cond
+    (:restart? input)
     (initial-state)
-    (let [dt (raylib/get-frame-time)
+
+    (:rewind? input)
+    (rewind-state state)
+
+    :else
+    (let [state (push-history state)
+          dt (raylib/get-frame-time)
           session (:session state)
           session (cond-> session
                     (:direction input)
@@ -573,6 +603,8 @@
                     28 194 20 colors/skyblue))
 
   (text/draw-text "R restart" 28 640 20 colors/gray)
+  (text/draw-text "Hold Z rewind" 28 610 20 colors/gray)
+  (text/draw-text (str "History: " (count (:history @state))) 28 584 18 colors/gray)
 
   (case (:status game)
     :game-over
@@ -632,3 +664,11 @@
 
 (defn -main [& _args]
   (start))
+
+(comment
+
+  (open-portal!)
+
+  (tap> (debug-snapshot @state))
+
+  ())
