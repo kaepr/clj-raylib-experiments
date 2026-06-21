@@ -13,6 +13,9 @@
               "-XstartOnFirstThread"
               "-Djava.library.path=libs:/opt/homebrew/opt/raylib/lib:/opt/homebrew/lib:/usr/local/lib:/usr/lib"]
    :main-opts ["-m" "core"]}
+  :portal
+  {:extra-deps
+   {djblue/portal {:mvn/version "0.65.0"}}}
   :pakman-dev
   {:extra-deps {nrepl/nrepl {:mvn/version "1.5.2"}
                 cider/cider-nrepl {:mvn/version "0.58.0"}
